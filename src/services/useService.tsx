@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import http, { defaultResponse, ServiceResponse } from './http';
+import { http, defaultResponse, ServiceResponse } from './http';
 import { API_URL, Endpoints } from './endpoints';
 
 function useService<T>(endpoint: Endpoints, request?: RequestInit): ServiceResponse<T> {

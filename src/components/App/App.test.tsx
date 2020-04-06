@@ -2,8 +2,25 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App.tsx', () => {
+  it('should display the balance component', () => {
+    const { getByTestId } = render(<App />);
+
+    const balance = getByTestId('balance');
+    expect(balance).toBeInTheDocument();
+  });
+
+  it('should display increase button', () => {
+    const { getByTestId } = render(<App />);
+
+    const increase = getByTestId('increase');
+    expect(increase).toBeInTheDocument();
+  });
+
+  it('should display decrease button', () => {
+    const { getByTestId } = render(<App />);
+
+    const decrease = getByTestId('decrease');
+    expect(decrease).toBeInTheDocument();
+  });
 });

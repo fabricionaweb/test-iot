@@ -6,21 +6,22 @@ import styles from './Balance.module.css';
 const Balance: React.FC = () => {
   const { state } = useStore();
   const { update } = useActions();
-  const response = useCurrencies();
+  const { data, error } = useCurrencies();
 
   const { balance, currency } = state;
   const isWarning = balance < 0;
 
   useEffect(() => {
-    const { data, error } = response;
-
     if (data && !error) {
       update(data);
     }
-  }, [response, update]);
+  }, [data, error, update]);
 
   return (
-    <div className={[styles.wrapper, isWarning ? styles.isWarning : ''].join(' ')}>
+    <div
+      data-testid="balance"
+      className={[styles.wrapper, isWarning ? styles.isWarning : ''].join(' ')}
+    >
       {currency} {balance.toFixed(2)}
     </div>
   );

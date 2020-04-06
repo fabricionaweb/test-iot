@@ -7,10 +7,10 @@ const Actions: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <button type="button" className={styles.button} onClick={increase}>
+      <button data-testid="increase" type="button" className={styles.button} onClick={increase}>
         +
       </button>
-      <button type="button" className={styles.button} onClick={decrease}>
+      <button data-testid="decrease" type="button" className={styles.button} onClick={decrease}>
         -
       </button>
     </div>

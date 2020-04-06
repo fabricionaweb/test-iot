@@ -10,8 +10,8 @@ interface Store {
 
 const Context = createContext({} as Store);
 
-const Provider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const Provider: React.FC<{ value?: Partial<State> }> = ({ children, value }) => {
+  const [state, dispatch] = useReducer(reducer, { ...initialState, ...value });
 
   return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
 };

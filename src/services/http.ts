@@ -38,4 +38,4 @@ function http<T>(input: RequestInfo, request?: RequestInit): Promise<ServiceResp
     }));
 }
 
-export default http;
+export { http };
