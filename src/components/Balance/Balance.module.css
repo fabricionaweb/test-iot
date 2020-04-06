@@ -1,0 +1,10 @@
+.wrapper {
+  font-size: 4rem;
+  color: grey;
+  min-width: 8rem;
+  text-align: right;
+}
+
+.isWarning {
+  color: red;
+}
