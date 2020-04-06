@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.css';
 
 const App: React.FC = function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <main className={styles.wrapper}>
+      <header>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -17,7 +17,7 @@ const App: React.FC = function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </main>
   );
 };
 
