@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import http, { defaultResponse, ServiceResponse } from './http';
 import { API_URL, Endpoints } from './endpoints';
-import { State } from '../store';
 
 function useService<T>(endpoint: Endpoints, request?: RequestInit): ServiceResponse<T> {
   const [response, setResponse] = useState(defaultResponse as ServiceResponse<T>);
@@ -13,6 +12,4 @@ function useService<T>(endpoint: Endpoints, request?: RequestInit): ServiceRespo
   return response;
 }
 
-const useCurrencies = (): ServiceResponse<State> => useService<State>(Endpoints.Currencies);
-
-export { useCurrencies };
+export { useService };
