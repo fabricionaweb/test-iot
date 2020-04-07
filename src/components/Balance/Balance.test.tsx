@@ -1,31 +1,47 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Balance from './Balance';
+import * as httpModule from '../../services/http';
 import { Provider, State } from '../../store';
+import Balance from './Balance';
 
 describe('Balance.tsx', () => {
-  const mockState: Partial<State> = {
-    balance: 123,
-    currency: '€',
-  };
+  beforeAll(() => {
+    const httpMocked = jest.spyOn(httpModule, 'http');
+    const stateMocked: State = {
+      balance: 123,
+      currency: '€',
+    };
+
+    httpMocked.mockImplementation(() => {
+      return Promise.resolve({
+        error: false,
+        loading: false,
+        data: stateMocked,
+      });
+    });
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
 
   const Component: React.FC = () => (
-    <Provider value={mockState}>
+    <Provider>
       <Balance />
     </Provider>
   );
 
-  it('should display the balance value', () => {
-    const { getByText } = render(<Component />);
+  it('should display the balance value', async () => {
+    const { findByText } = render(<Component />);
 
-    const balance = getByText(/123/);
+    const balance = await findByText(/123/);
     expect(balance).toBeInTheDocument();
   });
 
-  it('should display the currency value', () => {
-    const { getByText } = render(<Component />);
+  it('should display the currency value', async () => {
+    const { findByText } = render(<Component />);
 
-    const balance = getByText(/€/);
+    const balance = await findByText(/€/);
     expect(balance).toBeInTheDocument();
   });
 });

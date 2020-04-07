@@ -1,26 +1,43 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import * as httpModule from '../../services/http';
 import App from './App';
 
 describe('App.tsx', () => {
-  it('should display the balance component', () => {
-    const { getByTestId } = render(<App />);
+  beforeAll(() => {
+    const httpMocked = jest.spyOn(httpModule, 'http');
 
-    const balance = getByTestId('balance');
+    httpMocked.mockImplementation(() => {
+      return Promise.resolve({
+        error: false,
+        loading: false,
+        data: {},
+      });
+    });
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should display the balance component', async () => {
+    const { findByTestId } = render(<App />);
+    const balance = await findByTestId('balance');
+
     expect(balance).toBeInTheDocument();
   });
 
-  it('should display increase button', () => {
-    const { getByTestId } = render(<App />);
+  it('should display increase button', async () => {
+    const { findByTestId } = render(<App />);
+    const increase = await findByTestId('increase');
 
-    const increase = getByTestId('increase');
     expect(increase).toBeInTheDocument();
   });
 
-  it('should display decrease button', () => {
-    const { getByTestId } = render(<App />);
+  it('should display decrease button', async () => {
+    const { findByTestId } = render(<App />);
+    const decrease = await findByTestId('decrease');
 
-    const decrease = getByTestId('decrease');
     expect(decrease).toBeInTheDocument();
   });
 });
